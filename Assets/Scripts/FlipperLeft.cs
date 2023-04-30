@@ -9,6 +9,7 @@ public class FlipperLeft : Flipper
     {
         base.Start();
 
-        gameControls.PlayerInput.LeftFlipper.performed += Flipper_performed;        
+        gameControls.PlayerInput.LeftFlipper.performed += Flipper_performed;
+        gameControls.PlayerInput.LeftFlipper.canceled += Flipper_canceled;
     }
 }

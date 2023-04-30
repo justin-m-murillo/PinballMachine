@@ -10,5 +10,6 @@ public class FlipperRight : Flipper
         base.Start();
 
         gameControls.PlayerInput.RightFlipper.performed += Flipper_performed;
+        gameControls.PlayerInput.RightFlipper.canceled += Flipper_canceled;
     }
 }

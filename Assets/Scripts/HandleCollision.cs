@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HandleCollision : MonoBehaviour
 {
+    [SerializeField] Flipper flipper;
     private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,8 @@ public class HandleCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!flipper.flipExecuted) return;
+
         foreach (ContactPoint contact in collision.contacts)
         {
             if (contact.otherCollider.gameObject.layer != 6) continue;
