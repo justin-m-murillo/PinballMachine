@@ -44,6 +44,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LaunchPinball"",
+                    ""type"": ""Button"",
+                    ""id"": ""5fff8f9c-8ef4-4cc9-99de-8abe3fea8710"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""RightFlipper"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e6a68e1-deeb-4195-af7b-5e3fc3146240"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LaunchPinball"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +98,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_PlayerInput = asset.FindActionMap("PlayerInput", throwIfNotFound: true);
         m_PlayerInput_LeftFlipper = m_PlayerInput.FindAction("LeftFlipper", throwIfNotFound: true);
         m_PlayerInput_RightFlipper = m_PlayerInput.FindAction("RightFlipper", throwIfNotFound: true);
+        m_PlayerInput_LaunchPinball = m_PlayerInput.FindAction("LaunchPinball", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,12 +162,14 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private List<IPlayerInputActions> m_PlayerInputActionsCallbackInterfaces = new List<IPlayerInputActions>();
     private readonly InputAction m_PlayerInput_LeftFlipper;
     private readonly InputAction m_PlayerInput_RightFlipper;
+    private readonly InputAction m_PlayerInput_LaunchPinball;
     public struct PlayerInputActions
     {
         private @GameControls m_Wrapper;
         public PlayerInputActions(@GameControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @LeftFlipper => m_Wrapper.m_PlayerInput_LeftFlipper;
         public InputAction @RightFlipper => m_Wrapper.m_PlayerInput_RightFlipper;
+        public InputAction @LaunchPinball => m_Wrapper.m_PlayerInput_LaunchPinball;
         public InputActionMap Get() { return m_Wrapper.m_PlayerInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -162,6 +185,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @RightFlipper.started += instance.OnRightFlipper;
             @RightFlipper.performed += instance.OnRightFlipper;
             @RightFlipper.canceled += instance.OnRightFlipper;
+            @LaunchPinball.started += instance.OnLaunchPinball;
+            @LaunchPinball.performed += instance.OnLaunchPinball;
+            @LaunchPinball.canceled += instance.OnLaunchPinball;
         }
 
         private void UnregisterCallbacks(IPlayerInputActions instance)
@@ -172,6 +198,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @RightFlipper.started -= instance.OnRightFlipper;
             @RightFlipper.performed -= instance.OnRightFlipper;
             @RightFlipper.canceled -= instance.OnRightFlipper;
+            @LaunchPinball.started -= instance.OnLaunchPinball;
+            @LaunchPinball.performed -= instance.OnLaunchPinball;
+            @LaunchPinball.canceled -= instance.OnLaunchPinball;
         }
 
         public void RemoveCallbacks(IPlayerInputActions instance)
@@ -193,5 +222,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     {
         void OnLeftFlipper(InputAction.CallbackContext context);
         void OnRightFlipper(InputAction.CallbackContext context);
+        void OnLaunchPinball(InputAction.CallbackContext context);
     }
 }
