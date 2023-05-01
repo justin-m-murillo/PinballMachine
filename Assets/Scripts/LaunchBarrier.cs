@@ -14,6 +14,15 @@ public class LaunchBarrier : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("pinball")) return;
-        else boxCollider.isTrigger = false;
+        else SetBoxColliderTrigger(false);
+    }
+
+    /// <summary>
+    /// Whether to set this object's box collider to isTrigger
+    /// </summary>
+    /// <param name="value">True to enable isTrigger, false to disable isTrigger</param>
+    public void SetBoxColliderTrigger(bool value)
+    {
+        boxCollider.isTrigger = value;
     }
 }

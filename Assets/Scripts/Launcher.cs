@@ -7,10 +7,9 @@ public class Launcher : MonoBehaviour
     [SerializeField] float launchSpeed;
 
     private GameControls gameControls;
+    private Rigidbody rb;
     private float totalSpeed;
-    private float chargeTime;
     private bool isCharging;
-    private bool didLaunch;
 
     private void Awake()
     {
@@ -33,9 +32,7 @@ public class Launcher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        chargeTime = 0;
-        isCharging = false;
-        didLaunch = false;
+        ResetValues();
     }
 
     // Update is called once per frame
@@ -54,10 +51,16 @@ public class Launcher : MonoBehaviour
     private void LaunchPinball_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         isCharging = false;
-        didLaunch = true;
-
-        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.isKinematic = false;
         rb.AddForce(transform.forward * totalSpeed, ForceMode.Impulse);
         enabled = false;
+    }
+
+    public void ResetValues()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
+        totalSpeed = 0;
+        isCharging = false;
     }
 }
