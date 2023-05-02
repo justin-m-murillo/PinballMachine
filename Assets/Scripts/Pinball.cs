@@ -16,6 +16,17 @@ public class Pinball : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer != LayerMask.NameToLayer("bumper")) return;
-        else audioManager.UpdateBackGroundMetroSpeed(audioSpeedChange);
+        else
+        {
+            audioManager.phasorTracker++;
+            audioManager.TriggerCollisionAudio();
+            audioManager.UpdateBackGroundMetroSpeed(audioManager.backGroundMetroSpeed - audioSpeedChange);
+        }
     }
+
+    /*private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer != LayerMask.NameToLayer("bumper")) return;
+        else audioManager.TriggerCollisionAudio(0);
+    }*/
 }

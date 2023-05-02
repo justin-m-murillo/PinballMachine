@@ -7,6 +7,7 @@ public class Launcher : MonoBehaviour
     [SerializeField] float launchSpeed;
 
     private GameControls gameControls;
+    private AudioManager audioManager;
     private Rigidbody rb;
     private float totalSpeed;
     private bool isCharging;
@@ -32,6 +33,7 @@ public class Launcher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = GameObject.FindWithTag("audioManager").GetComponent<AudioManager>();
         ResetValues();
     }
 
@@ -39,13 +41,20 @@ public class Launcher : MonoBehaviour
     void Update()
     {
         if (!isCharging) return;
+        else
+        {
+            totalSpeed += launchSpeed * Time.deltaTime;
+            float audioLaunchChange = 400 * Time.deltaTime;
+            audioManager.UpdateLaunchCharge(
+                audioManager.launchCharge - (int)audioLaunchChange);
+        }
 
-        totalSpeed += launchSpeed * Time.deltaTime;
     }
 
     private void LaunchPinball_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         isCharging = true;
+        audioManager.ToggleLaunchCharge(1);
     }
 
     private void LaunchPinball_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -53,6 +62,10 @@ public class Launcher : MonoBehaviour
         isCharging = false;
         rb.isKinematic = false;
         rb.AddForce(transform.forward * totalSpeed, ForceMode.Impulse);
+        
+        audioManager.UpdateLaunchCharge(audioManager.launchShoot);
+        audioManager.didLaunch = true;
+
         enabled = false;
     }
 
@@ -62,5 +75,6 @@ public class Launcher : MonoBehaviour
         rb.isKinematic = true;
         totalSpeed = 0;
         isCharging = false;
+        audioManager.launchCharge = 800;
     }
 }
