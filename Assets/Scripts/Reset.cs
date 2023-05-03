@@ -8,6 +8,13 @@ public class Reset : MonoBehaviour
     [SerializeField] Transform pinballSpawner;
     [SerializeField] LaunchBarrier barrier;
 
+    private AudioManager audioManager;
+
+    private void Start()
+    {
+        audioManager = GameObject.FindWithTag("audioManager").GetComponent<AudioManager>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("pinball")) return;
@@ -18,5 +25,7 @@ public class Reset : MonoBehaviour
         launcher.enabled = true;
         launcher.ResetValues();
         barrier.SetBoxColliderTrigger(true);
+
+        audioManager.ResetCollisionInc();
     }
 }

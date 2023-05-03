@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 using UnityOSC;
@@ -17,6 +18,8 @@ public class AudioManager : MonoBehaviour
 
     public bool collided;
     private float collidedTimer;
+    private float collisionVolReset;
+    private float collisionIncReset;
 
     void Awake()
     {
@@ -39,12 +42,15 @@ public class AudioManager : MonoBehaviour
 
         collided = false;
         collidedTimer = 0.5f;
+        collisionVolReset = 0f;
+        collisionIncReset = 0f;
 
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/background", 1);
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/metro", backGroundMetroSpeed);
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/charge", launchCharge);
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/phasor", phasor);
-
+        OSCHandler.Instance.SendMessageToClient("pd", "/unity/collisionInc", collisionIncReset);
+        OSCHandler.Instance.SendMessageToClient("pd", "/unity/collisionVol", collisionVolReset);
     }
 
     // FOR EDITOR QUIT ONLY (NOT PRODUCTION BUILD)
@@ -98,13 +104,15 @@ public class AudioManager : MonoBehaviour
         else collided = true;
 
         collidedTimer = 0.5f;
-        OSCHandler.Instance.SendMessageToClient("pd", "/unity/collision", 1);
+        OSCHandler.Instance.SendMessageToClient("pd", "/unity/collision", "bang");
     }
 
     private void DisableCollisionAudio()
     {
         collided = false;
-        OSCHandler.Instance.SendMessageToClient("pd", "/unity/collision", 0);
+        OSCHandler.Instance.SendMessageToClient("pd", "/unity/collision", "bang");
+        OSCHandler.Instance.SendMessageToClient("pd", "/unity/collisionVol", collisionVolReset);
+
     }
 
     private void DisableShootAudio()
@@ -118,5 +126,10 @@ public class AudioManager : MonoBehaviour
     {
         phasor++;
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/phasor", phasor);
+    }
+
+    public void ResetCollisionInc()
+    {
+        OSCHandler.Instance.SendMessageToClient("pd", "/unity/collisionInc", collisionIncReset);
     }
 }

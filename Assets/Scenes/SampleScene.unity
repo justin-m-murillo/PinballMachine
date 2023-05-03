@@ -1302,7 +1302,7 @@ GameObject:
   - component: {fileID: 795501528}
   - component: {fileID: 795501527}
   - component: {fileID: 795501526}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right Flipper Stopper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1388,7 +1388,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 795501525}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!4 &795501530
 Transform:
   m_ObjectHideFlags: 0
@@ -1846,7 +1846,7 @@ GameObject:
   - component: {fileID: 1123896156}
   - component: {fileID: 1123896155}
   - component: {fileID: 1123896154}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left Flipper Stopper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1932,7 +1932,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1123896153}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!4 &1123896158
 Transform:
   m_ObjectHideFlags: 0
@@ -2797,7 +2797,7 @@ GameObject:
   - component: {fileID: 1619448273}
   - component: {fileID: 1619448272}
   - component: {fileID: 1619448271}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right Flipper Stopper (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2883,7 +2883,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619448270}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!4 &1619448275
 Transform:
   m_ObjectHideFlags: 0
@@ -3662,7 +3662,7 @@ GameObject:
   - component: {fileID: 2006109503}
   - component: {fileID: 2006109502}
   - component: {fileID: 2006109501}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left Flipper Stopper (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3748,7 +3748,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006109500}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!4 &2006109505
 Transform:
   m_ObjectHideFlags: 0
